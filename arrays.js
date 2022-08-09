@@ -18,9 +18,9 @@ bienvenidaUsuario = prompt("desea comprar algo si o no")
 if(bienvenidaUsuario == "si"){
     alert("hoy disponible ofertas de amoladoras")
     let misProductos = productos.map(
-        (producto) => producto.nombre + " " + producto.precio + "$"
+        (producto) => producto.nombre + "$" + producto.precio + ""
         );
-        alert(misProductos.join("-"))
+        alert(misProductos.join("//"))
 }
 else if(bienvenidaUsuario == "no"){
     alert("gracias por venir Hasta luego!")
@@ -53,7 +53,7 @@ while(bienvenidaUsuario != "no"){
     bienvenidaUsuario = prompt("desea seguir comprando?")
 
     while (bienvenidaUsuario=== "no"){
-        alert("gracias por la compra")
+        alert("gracias por la compra, en la consola vera su total")
         carrito.forEach((carritoTotal)=>{
             console.log(`producto: ${carritoTotal.producto} , unidades: ${carritoTotal.unidades}, total a pagar por producto ${carritoTotal.unidades * carritoTotal.precio}`)
         })
