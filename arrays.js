@@ -1,4 +1,4 @@
-//Leonel Gonzalez proyecto ferreteria//
+///Leonel Gonzalez proyecto ferreteria//
 //carrito de compras//array de amoladoras//
 const productos = [
 {nombre: "amoladora bosch", precio: 15.533},
