@@ -9,6 +9,7 @@ const buscador = document.getElementById('search')
 
 
 
+
 //filtro carrito
 selectMarca.addEventListener('change',()=>{
     if(selectMarca.value == 'all'){
@@ -31,7 +32,7 @@ function mostrarProductos(array){
     contenedorProductos.innerHTML=''
    array.forEach(item =>{
 
-    let div = document.createElement('div')// <div 
+    let div = document.createElement('div')
 
     div.className = 'producto'
 
@@ -68,12 +69,14 @@ function agregarAlCarrito(id) {
         existe.cantidad = existe.cantidad + 1
         document.getElementById(`cant${existe.id}`).innerHTML = `<p id="cant${existe.id}">cantidad:${existe.cantidad}</p>`
         actualizarCarrito()
+        GuardarStorage();
     }else{
         let productoAgregar = stockProductos.find(item=> item.id == id)
         productoAgregar.cantidad = 1
         carritoDeCompras.push(productoAgregar);
         mostrarCarrito(productoAgregar)
         actualizarCarrito()
+        GuardarStorage();
     }
     
 }
@@ -104,6 +107,9 @@ function eliminar() {
     }
 }
 
+  
+
+
 
 function  actualizarCarrito (){
    contadorCarrito.innerText= carritoDeCompras.reduce((acc,el)=> acc + el.cantidad, 0)            
@@ -112,5 +118,30 @@ function  actualizarCarrito (){
 
 
 
+//local storge//
 
+function GuardarStorage() {
+    localStorage.setItem("carroOlvidado",JSON.stringify(carritoDeCompras)); //Guarda en storage.
+  }
+ 
+ function VerificarCargar() {
+    let arrayCarrito = JSON.parse(localStorage.getItem("carroOlvidado")); //Trae el carrito de la storage.
+   if(arrayCarrito) { //Si hay algo...
+      const Toast = Swal.mixin({ //Sweet alert tu carrito espera.
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'warning',
+        title: 'Tu carrito te espera!'
+      })
+    }
+}
 
