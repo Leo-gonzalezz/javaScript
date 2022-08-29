@@ -7,17 +7,21 @@ const precioTotal = document.getElementById('precioTotal');
 const selectMarca = document.getElementById('selectMarca')
 const buscador = document.getElementById('search')
 
-
-
-
-//filtro carrito
+/*//filtro carrito
 selectMarca.addEventListener('change',()=>{
     if(selectMarca.value == 'all'){
         mostrarProductos(stockProductos)
     }else{
         mostrarProductos(stockProductos.filter(item=> item.marca == selectMarca.value))
     }
+})*/
+
+//cambio a operador ternario//
+selectMarca.addEventListener('change',()=>{
+(selectMarca.value == 'all')? mostrarProductos(stockProductos):mostrarProductos.filter(item=> item.marca == selectMarca.value)
 })
+
+
 
 //Buscador
 buscador.addEventListener('input',()=>{
@@ -70,6 +74,7 @@ function agregarAlCarrito(id) {
         document.getElementById(`cant${existe.id}`).innerHTML = `<p id="cant${existe.id}">cantidad:${existe.cantidad}</p>`
         actualizarCarrito()
         GuardarStorage();
+       
     }else{
         let productoAgregar = stockProductos.find(item=> item.id == id)
         productoAgregar.cantidad = 1
@@ -94,6 +99,7 @@ function mostrarCarrito(productoAgregar) {
                     <i class="fas fa-trash-alt"></i>
                     </button>`
     contenedorCarrito.appendChild(div)
+    
 }
 
 function eliminar() {
@@ -103,6 +109,7 @@ function eliminar() {
             btn.parentElement.remove();
             carritoDeCompras = carritoDeCompras.filter(item => item.id != e.target.parentElement.id)
             actualizarCarrito()
+            
         })
     }
 }
@@ -142,6 +149,5 @@ function GuardarStorage() {
         icon: 'warning',
         title: 'Tu carrito te espera!'
       })
-    }
+   }
 }
-
