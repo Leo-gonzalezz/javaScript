@@ -100,6 +100,7 @@ function mostrarCarrito(productoAgregar) {
                     </button>`
     contenedorCarrito.appendChild(div)
     
+   
 }
 
 function eliminar() {
@@ -121,11 +122,13 @@ function eliminar() {
 function  actualizarCarrito (){
    contadorCarrito.innerText= carritoDeCompras.reduce((acc,el)=> acc + el.cantidad, 0)            
    precioTotal.innerText = carritoDeCompras.reduce((acc,el)=> acc + (el.precio * el.cantidad), 0)
+   
 }                                                             
 
 
 
-//local storge//
+
+//local storge + libreria//
 
 function GuardarStorage() {
     localStorage.setItem("carroOlvidado",JSON.stringify(carritoDeCompras)); //Guarda en storage.
